@@ -1,0 +1,14 @@
+import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+df = pd.read_csv(r'C:\Users\SVISHWANATH\Downloads\creditcard.csv')
+# Find the dataset here: https://www.kaggle.com/mlg-ulb/creditcardfraud
+f = df.drop(['Class'], axis = 1)
+g = df.Class
+X_train, X_test, y_train, y_test = train_test_split(f, g, stratify = g)
+knn = KNeighborsClassifier(n_neighbors = 5)
+knn.fit(X_train, y_train)
+a = knn.predict(X_test)
+df1 = pd.DataFrame(data = a, columns = ['Data'])
+df1["Data"].value_counts()
+knn.score(X_test, y_test)
