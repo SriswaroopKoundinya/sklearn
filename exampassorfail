@@ -1,7 +1,7 @@
 import numpy as np 
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
-//Download the PassOrFailCleaned csv file and type in your file path.
+#Download the PassOrFailCleaned csv file and type in your file path.
 df = pd.read_csv(r'C:\Users\SVISHWANATH\PassOrFailCleaned.csv')
 df.drop('Unnamed: 0', axis=1, inplace=True)
 X = df.drop(['Exam Pass'], axis=1)
@@ -10,9 +10,12 @@ lr = LogisticRegression()
 lr.fit(X,y)
 z = int(input('Enter how much time you studied.'))
 Z = int(input('Enter your Classroom Math Grade.'))
-d = np.array([[z,Z]])
-predictions = lr.predict(d)
-if predictions == 0:
-    print('You will most likely not pass the exam.')
+if Z>100 or Z<0 or z<0:
+    print('Please enter correct value(s).')
 else:
-    print('You will most likely pass the exam.')
+    d = np.array([[z,Z]])
+    predictions = lr.predict(d)
+    if predictions == 0:
+        print('You will most likely not pass the exam.')
+    else:
+        print('You will most likely pass the exam.')
