@@ -1,0 +1,14 @@
+import pandas as pd
+df = pd.read_csv(r'D:\Data Science\Datasets\social_network_ads.csv')
+X = df.drop('Purchased', axis =1)
+y = df.Purchased
+from sklearn.model_selection import train_test_split
+from imblearn.over_sampling import SMOTE
+smote = SMOTE()
+X_train, X_test, y_train, y_test = train_test_split(X, y)
+X_train_smote, y_train_smote = smote.fit_sample(X_train.astype(float), y_train)
+tree.fit(X_train_smote, y_train_smote)
+predictions = tree.predict(X_test)
+from sklearn.metrics import classification_report, confusion_matrix
+print(classification_report(y_test, predictions))
+print(confusion_matrix(y_test, predictions))
